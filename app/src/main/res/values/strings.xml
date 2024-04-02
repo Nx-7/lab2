@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Notes-CM</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_button">Add</string>
+    <string name="update_button">Update</string>
+    <string name="remove_button">Remove</string>
+    <string name="back_button">Back</string>
+    <string name="note">Note</string>
+    <string name="text_add_error">Error adding Note!</string>
+    <string name="text_add_complete">Note added successfully!</string>
+    <string name="selectDate">Add Date</string>
+    <string name="text_update_complete">Note Updated Successfully!</string>
 </resources>

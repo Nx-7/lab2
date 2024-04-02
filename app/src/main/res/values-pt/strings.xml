@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notes-CM</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_button">Adicionar</string>
+    <string name="update_button">Atualizar</string>
+    <string name="remove_button">Apagar</string>
+    <string name="back_button">Retroceder</string>
+    <string name="note">Nota</string>
+    <string name="text_add_error">Erro ao adicionar Nota!</string>
+    <string name="text_add_complete">Nota adicionada com Sucesso!</string>
+    <string name="selectDate">Selecionar Data</string>
+    <string name="text_update_complete">Nota Alterada com Sucesso!</string>
+</resources>

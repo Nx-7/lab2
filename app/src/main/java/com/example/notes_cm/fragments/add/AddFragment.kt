@@ -13,9 +13,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.notes_cm.R
 import com.example.notes_cm.data.entities.Note
 import com.example.notes_cm.data.vm.NoteViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddFragment : Fragment() {
     private lateinit var mNoteViewModel: NoteViewModel
+    private var noteDate: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,22 +40,40 @@ class AddFragment : Fragment() {
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         }
 
+        val dateButton = view.findViewById<Button>(R.id.addDate)
+        dateButton.setOnClickListener {
+            showDateModal()
+        }
+
         return view
+    }
+
+    private fun showDateModal() {
+        val datePicker = MaterialDatePicker.Builder.datePicker().build()
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            noteDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(selection))
+        }
+        datePicker.show(childFragmentManager, "datePicker")
     }
 
     private fun addNote() {
         val noteText = view?.findViewById<EditText>(R.id.addNote)?.text.toString()
 
         if(noteText.isEmpty()) {
-            Toast.makeText(view?.context, "Não pode uma nota vazia!", Toast.LENGTH_LONG).show()
+            Toast.makeText(view?.context, "Não pode criar uma nota vazia!", Toast.LENGTH_LONG).show()
         }
         else {
-            val note = Note(0, noteText)
+            if (noteDate.isEmpty()) {
+                Toast.makeText(view?.context, getString(R.string.text_add_error), Toast.LENGTH_LONG).show()
+            } else {
+                val addedNote = Note(0, noteText, noteDate)
 
-            mNoteViewModel.addNote(note)
+                mNoteViewModel.addNote(addedNote)
 
-            Toast.makeText(requireContext(), "Gravado com sucesso!", Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_addFragment_to_listFragment)
+                Toast.makeText(requireContext(), getString(R.string.text_add_complete), Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_addFragment_to_listFragment)
+            }
+
         }
     }
 }
